@@ -21,6 +21,13 @@
 			<form action="{{url('/payer')}}" method ="POST" id ="checkout-form" class ="billing-form">
 				{{ csrf_field() }}
 				<h3 class="mb-4 billing-heading">Billing Details</h3>
+
+				@if (Session::has('error'))
+					<div class="alert alert-danger">
+						{{Session::get('error')}}
+						{{Session::put('error', null)}}
+					</div>
+				@endif
 				<div class="row align-items-end">
 					<div class="col-md-12">
 				  		<div class="form-group">

@@ -36,7 +36,7 @@
                         {{-- <td>
                             <label class="badge badge-info">On hold</label></td>--}}
                           <td>
-                              <button class="btn btn-outline-primary" onclick="window.location='{{url('/edit_categorie/'.$category->id)}}'">Modifier</button>
+                              <button class="btn btn-outline-primary" onclick="window.location ='{{url('/edit_categorie/'.$category->id)}}'">Modifier</button>
                               <a href="{{url('/supprimercategorie/'.$category->id)}}" id="delete" class="btn btn-outline-danger"> Delete</a>
                           </td>
                       </tr>

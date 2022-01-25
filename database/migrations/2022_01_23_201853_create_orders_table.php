@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('nom');
             $table->string('adresse');
-            $table->string('panier');
+            $table->mediumText('panier');
             $table->string('payment_id');
             $table->timestamps();
         });

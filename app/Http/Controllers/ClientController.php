@@ -7,9 +7,11 @@ use App\Models\Slider;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Order;
+use App\Models\Client;
 use App\Cart;
 use Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
 use Stripe\Charge;
 use Stripe\Stripe;
 
@@ -148,6 +150,45 @@ class ClientController extends Controller
         return redirect('/panier')->with('status','Votre achat a été effectué avec succès.');
     }
 
+    public function creer_compte(Request $request){
+        $this->validate($request, ['email'=>'email|required|unique:clients',
+                                    'password'=>'required|min:4']);
+
+        $client = new Client();
+        $client->email = $request->input('email');
+        $client->password = bcrypt($request->input('password'));
+
+        $client->save();
+
+        return back()->with('status', 'Votre compte a été créé avec succès.');
+    }
+
+    public function acceder_compte(Request $request){
+
+        $this->validate($request, ['email'=>'email|required',
+                                    'password'=>'required']);
+
+        $client = Client::where('email', $request->input('email'))->first();
+
+        if ($client) {
+            # code...
+
+            if (Hash::check($request->input('password'), $client->password)) {
+                # code...
+                    return redirect('/shop');
+            } else {
+                # code...
+                    return back()->with('status', 'Mot de passe ou email erroné');
+            }
+            
+
+        } else {
+            # code...
+
+            return back()->with('status', 'Vous n'."'".'avez pas de compte');
+        }
+        
+    }
 
     public function client_login(){
 

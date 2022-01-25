@@ -28,7 +28,11 @@ Route::get('/ajouter_au_panier/{id}','ClientController@ajouter_au_panier');
 Route::post('/modifier_qty/{id}','ClientController@modifier_panier');
 Route::get('/retirer_produit/{id}','ClientController@retirer_produit');
 Route::post('/payer','ClientController@payer');
+Route::post('/creer_compte','ClientController@creer_compte');
+Route::post('/acceder_compte', 'ClientController@acceder_compte');
 
+
+Route::get('/voir_pdf/{id}', 'PdfController@voir_pdf');
 
 Route::get('/admin','AdminController@dashboard');
 Route::get('/commandes','AdminController@commandes');
